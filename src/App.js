@@ -8,6 +8,22 @@ import {
   BrowserRouter as Router
 } from "react-router-dom";
 
+const appStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    padding: 16,
+    paddingTop: 32
+  }
+});
+
+const characterStyles = StyleSheet.create({
+  name: {
+    fontSize: 24,
+    fontWeight: "bold"
+  }
+});
+
 class PokemonFetch extends React.Component {
   state = { character: null };
 
@@ -34,13 +50,6 @@ class PokemonFetch extends React.Component {
     );
   }
 }
-
-const characterStyles = StyleSheet.create({
-  name: {
-    fontSize: "1.5em",
-    fontWeight: "bold"
-  }
-});
 
 const Pokemon = props => {
   return (
@@ -90,8 +99,8 @@ class Index extends React.Component {
 class App extends React.Component {
   render() {
     return (
-      <Router basename={"/pokedex-web"}>
-        <View>
+      <Router basename="/pokedex-web">
+        <View style={appStyles.container}>
           <Route path="/" exact={true} component={Index} />
 
           <Route
@@ -104,15 +113,21 @@ class App extends React.Component {
                 <Redirect to="/" />
               ) : (
                 <View>
-                  <Link to="/">{"<"} Back</Link>
+                  <Link to="/">
+                    <Text>{"<"} Back</Text>
+                  </Link>
 
                   <PokemonFetch
                     id={match.params.id}
                     render={character => <Pokemon character={character} />}
                   />
 
-                  <Link to={`/pokemon/${id - 1}`}>Previous</Link>
-                  <Link to={`/pokemon/${id + 1}`}>Next︎</Link>
+                  <Link to={`/pokemon/${id - 1}`}>
+                    <Text>Previous</Text>
+                  </Link>
+                  <Link to={`/pokemon/${id + 1}`}>
+                    <Text>Next︎</Text>
+                  </Link>
                 </View>
               );
             }}
