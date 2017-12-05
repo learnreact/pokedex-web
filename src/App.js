@@ -90,7 +90,7 @@ class Index extends React.Component {
 class App extends React.Component {
   render() {
     return (
-      <Router>
+      <Router basename={"/pokedex-web"}>
         <View>
           <Route path="/" exact={true} component={Index} />
 
